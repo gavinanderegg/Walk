@@ -1,0 +1,41 @@
+Halifax to MT&L Saint John, 75 Prince Street:  415 km x 1,320 steps = 547,800 steps
+
+Saint John to NATIONAL Quebec City, 140 Grande Allée Est:  470 km x 1,320 steps = 620,400 steps
+
+QC to NATIONAL Montreal, 2001 McGill College Avenue:  260 km x 1,320 steps = 343,200 steps
+
+Montreal to NATIONAL Ottawa, 130 Slater Street:  190 km x 1,320 steps = 250,800 steps
+
+Ottawa to NATIONAL Toronto, 310 Front Street Wes:  390 km x 1,320 steps = 514,800 steps
+
+Toronto to NATIONAL Calgary, 800 6th Avenue S:  3,400 km x 1,320 steps = 4,488,000
+
+Calgary to NATIONAL Vancouver, 505 Burrard Street:  1,055 km x 1,320 steps = 1,392,600 steps
+
+Vancouver to NATIONAL Victoria, 931 Fort Street:  120 km x 1,320 steps = 158,400 steps
+
+That’s 8,316,000 steps one way.  Dip your toes in the Pacific Ocean and walk back again! 
+
+
+
+
+
+
+
+
+$(offices).each(function(key, value) {
+	geocoder.geocode({'address': value.location, 'region': 'ca'}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			var lat = results[0].geometry.location.lat();
+			var lng = results[0].geometry.location.lng();
+			
+			console.log(value.name + ' : lat ' + lat + ' lng ' + lng);
+			
+			var latlng = new google.maps.LatLng(lat, lng);
+			
+			value.latlng = latlng;
+			
+			drawLocation(latlng);
+		}
+	});
+});
